@@ -54,17 +54,23 @@ RUN echo 'echo -e "\\e[1;33m===== Welcome to Pyjamacafe Sandbox =====\\e[0m"' >>
     echo 'echo -e "\\e[1;33m=========================================\\e[0m\\n"' >> /home/pyjamacafe/.bashrc
 RUN echo "PS1='\[\e[32m\]\u\[\e[00m\]:\[\e[33m\]\w\[\e[00m\]\\n$ '" >> /home/pyjamacafe/.bashrc
 
-# ---- 5. Install GDB Dashboard ----------
-RUN wget -P /home/pyjamacafe/ https://git.io/.gdbinit
+RUN pip3 install pygments
 
-# ---- 6. Working directory ----
+# ---- 5. Working directory ----
 WORKDIR /home/pyjamacafe
 
-# ---- 7. Switch to the non‑root user ----
+# ---- 6. Switch to the non‑root user ----
 USER pyjamacafe
 
 # terminal colors with xterm
 ENV TERM=xterm
 
-# ---- 8. Default command (replace if you need something else) ----
+# ---- 7. Install GDB Dashboard ----------
+RUN wget -P ~ https://git.io/.gdbinit
+
+# ---- 8. Install rustup ----------
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="~/.cargo/bin:${PATH}"
+
+# ---- 9. Default command (replace if you need something else) ----
 CMD ["bash"]
