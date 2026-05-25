@@ -18,6 +18,7 @@ RUN apt-get update && \
     libnewlib-arm-none-eabi \
     libssl-dev \
     libc6-dev \
+    rustc \
     libncurses5-dev \
     crossbuild-essential-arm64 xxd \
     strace man openssh-server && \
@@ -67,4 +68,3 @@ ENV TERM=xterm
 
 # ---- 8. Default command (replace if you need something else) ----
 CMD ["bash"]
-
